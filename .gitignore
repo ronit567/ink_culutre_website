@@ -1,0 +1,37 @@
+# Source footage — masters stay local; the web encode in assets/ is what ships.
+# (assets/studio-loop.mp4 + assets/studio-poster.jpg are tracked on purpose.)
+*.mov
+*.MOV
+*.mp4
+!assets/studio-loop.mp4
+*.mxf
+*.braw
+*.r3d
+
+# Raw photography / working files
+*.psd
+*.ai
+*.tif
+*.tiff
+*.RAW
+*.CR2
+*.ARW
+*.dng
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Tooling, if a build ever lands here
+node_modules/
+npm-debug.log*
+.cache/
+dist/

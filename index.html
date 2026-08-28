@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Ink Culture — Private Tattoo Studio, Denver</title>
+<meta name="description" content="The Ink Culture is a private, appointment-only tattoo studio in central Denver. Custom black and grey realism, fine line, lettering and ornamental blackwork." />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="assets/ink-culture-mark.jpg" />
+<link rel="apple-touch-icon" href="assets/ink-culture-mark.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#studio">Skip to content</a>
+
+<header class="site-header">
+  <a class="brand" href="#top">
+    <img src="assets/ink-culture-logo.png" alt="The Ink Culture Tattoo Studio" width="148" height="105" />
+    <span class="brand__est">Est. 2009</span>
+  </a>
+
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+    <span class="nav-toggle__bar"></span>
+    <span class="nav-toggle__bar"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav">
+    <a href="#studio">Studio</a>
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero__texture" aria-hidden="true"></div>
+
+    <!-- Studio loop, encoded from inkstudio_vid.mov. The stripe texture above sits
+         behind it and shows while the video buffers or if playback is refused. -->
+    <video class="hero__video" autoplay muted loop playsinline preload="metadata"
+           poster="assets/studio-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/studio-loop.mp4" type="video/mp4" />
+    </video>
+
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <h1 class="hero__title">The Ink Culture</h1>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <div class="hero__meta">
+        <span>1428 Lafayette Street</span>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>Denver, CO 80218</span>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href="tel:+13035550142">(303) 555 0142</a>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#contact">Book a consultation</a>
+        <a class="btn btn--ghost" href="#work">See the work</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">Scroll</div>
+  </section>
+
+  <section class="studio" id="studio">
+    <div class="wrap studio__grid">
+      <div>
+        <p class="eyebrow eyebrow--light">01 / The studio</p>
+        <h2 class="h2 h2--dark">Custom work, one client at a time.</h2>
+      </div>
+      <div class="studio__body">
+        <p class="lede">The Ink Culture is a private, appointment-only studio in central Denver. Every piece starts with a conversation and a drawing made for you — no flash walls, no rushed sessions, no shared floor.</p>
+        <p class="lede">Our three resident artists work across black and grey realism, fine line, traditional lettering and ornamental blackwork. The room is licensed, single-use throughout, and quiet enough to sit for eight hours.</p>
+        <dl class="stats">
+          <div class="stat">
+            <dt class="stat__num">17</dt>
+            <dd class="stat__label">Years open</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__num">3</dt>
+            <dd class="stat__label">Resident artists</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__num">1:1</dt>
+            <dd class="stat__label">Private sessions</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow eyebrow--dark">02 / Selected work</p>
+          <h2 class="h2">Portfolio</h2>
+        </div>
+        <a class="section-head__link" href="#contact">Enquire about a piece</a>
+      </div>
+
+      <!-- To publish photography, add an <img class="shot__img" src="…" alt="…" />
+           as the first child of a .shot figure. The caption scrim is already styled for it. -->
+      <div class="shots">
+        <figure class="shot">
+          <figcaption class="shot__caption">Blackwork sleeve</figcaption>
+        </figure>
+        <figure class="shot">
+          <figcaption class="shot__caption">Fine line floral</figcaption>
+        </figure>
+        <figure class="shot">
+          <figcaption class="shot__caption">Lettering panel</figcaption>
+        </figure>
+        <figure class="shot">
+          <figcaption class="shot__caption">Realism portrait</figcaption>
+        </figure>
+        <figure class="shot">
+          <figcaption class="shot__caption">Ornamental chest</figcaption>
+        </figure>
+        <figure class="shot">
+          <figcaption class="shot__caption">Cover-up rework</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head section-head--light">
+        <div>
+          <p class="eyebrow eyebrow--light">03 / Services</p>
+          <h2 class="h2 h2--dark">What we do</h2>
+        </div>
+      </div>
+
+      <div class="service-list">
+        <article class="service">
+          <span class="service__num">01</span>
+          <h3 class="service__name">Custom tattoo</h3>
+          <p class="service__copy">Original design drawn for you after a consultation. Sessions run three to eight hours with breaks.</p>
+        </article>
+        <article class="service">
+          <span class="service__num">02</span>
+          <h3 class="service__name">Cover-ups &amp; rework</h3>
+          <p class="service__copy">Assessment of existing work, then a design that resolves it rather than hiding it.</p>
+        </article>
+        <article class="service">
+          <span class="service__num">03</span>
+          <h3 class="service__name">Fine line &amp; small pieces</h3>
+          <p class="service__copy">Single-session work, booked in half-day slots.</p>
+        </article>
+        <article class="service">
+          <span class="service__num">04</span>
+          <h3 class="service__name">Consultation</h3>
+          <p class="service__copy">Thirty minutes in the studio or over video to talk through subject, placement and timing.</p>
+        </article>
+        <div class="service-list__end" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact__grid">
+      <div>
+        <p class="eyebrow eyebrow--light">04 / Contact</p>
+        <h2 class="h2 h2--dark contact__title">Book a consultation</h2>
+        <p class="contact__intro">Tell us what you have in mind. We reply to every enquiry within two business days and consultations are free.</p>
+
+        <div class="details">
+          <div class="detail">
+            <div class="detail__label">Studio</div>
+            <div class="detail__value">1428 Lafayette Street<br />Denver, CO 80218</div>
+          </div>
+          <div class="detail">
+            <div class="detail__label">Hours</div>
+            <div class="detail__value">Tuesday – Saturday, 11am – 8pm<br />By appointment only</div>
+          </div>
+          <div class="detail">
+            <div class="detail__label">Direct</div>
+            <div class="detail__value">
+              <a href="tel:+13035550142">(303) 555 0142</a><br />
+              <a href="mailto:studio@theinkculture.com">studio@theinkculture.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wire `action` to your form endpoint (Formspree, Netlify Forms, your own handler).
+           script.js posts it with fetch when an action is present, and falls back to a
+           normal submit if JavaScript is unavailable. -->
+      <form class="booking" novalidate>
+        <div class="booking__card">
+          <label class="field">
+            <span class="field__label">Name</span>
+            <input class="field__input" name="name" type="text" placeholder="Full name" required autocomplete="name" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Phone</span>
+            <input class="field__input" name="phone" type="tel" placeholder="(000) 000 0000" autocomplete="tel" />
+          </label>
+
+          <label class="field field--full">
+            <span class="field__label">Email</span>
+            <input class="field__input" name="email" type="email" placeholder="you@email.com" required autocomplete="email" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Style</span>
+            <select class="field__input field__select" name="style">
+              <option>Black &amp; grey realism</option>
+              <option>Fine line</option>
+              <option>Lettering</option>
+              <option>Ornamental blackwork</option>
+              <option>Cover-up / rework</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field__label">Placement &amp; size</span>
+            <input class="field__input" name="placement" type="text" placeholder="e.g. forearm, 15cm" />
+          </label>
+
+          <label class="field field--full">
+            <span class="field__label">Your idea</span>
+            <textarea class="field__input field__textarea" name="idea" rows="4" placeholder="Subject, references, anything we should know."></textarea>
+          </label>
+
+          <div class="booking__foot">
+            <span class="booking__note" data-form-note aria-live="polite">A deposit holds your date.</span>
+            <button class="btn btn--dark" type="submit" data-submit>Send request</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <img class="footer__logo" src="assets/ink-culture-logo.png" alt="The Ink Culture Tattoo Studio" width="148" height="105" />
+        <p class="footer__blurb">Private appointment-only tattoo studio in central Denver. Custom work only.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Visit</div>
+        <div class="footer__text">1428 Lafayette Street<br />Denver, CO 80218<br /><a href="tel:+13035550142">(303) 555 0142</a></div>
+      </div>
+      <div>
+        <div class="footer__heading">Studio</div>
+        <div class="footer__links">
+          <a href="#studio">About</a>
+          <a href="#work">Portfolio</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Booking</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Follow</div>
+        <div class="footer__links">
+          <a href="https://instagram.com/" rel="me noopener" target="_blank">Instagram</a>
+          <a href="https://facebook.com/" rel="me noopener" target="_blank">Facebook</a>
+          <a href="mailto:studio@theinkculture.com">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 The Ink Culture Tattoo Studio</span>
+      <span>Licensed by the Colorado Department of Public Health · 18+ with valid ID</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
