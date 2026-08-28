@@ -729,11 +729,8 @@ input, textarea, button, select { font-family: inherit; }
   }
   .site-nav a:last-child { border-bottom: 0; }
 
-  /* The loop is 1.9:1 — cover on a tall phone screen crops it to a sliver, so
-     fit the full width and let the texture behind fill the rest. */
-  .hero { height: 76vh; min-height: 500px; }
-  .hero__video { object-fit: contain; }
-  .hero__actions { margin-top: 30px; }
+  .hero { height: 92vh; min-height: 540px; }
+  .hero__actions { margin-top: 34px; }
 
   .studio, .contact { padding: 60px var(--gutter); }
   .services { padding: 56px var(--gutter); }
@@ -759,8 +756,14 @@ input, textarea, button, select { font-family: inherit; }
   .service__name { font-size: 21px; }
   .service__copy { grid-column: 2; font-size: 15.5px; line-height: 1.55; }
 
-  .section-head { gap: 20px; }
-  .section-head__link { white-space: normal; }
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+  }
+  .section-head__link { white-space: nowrap; }
 
   /* contact — tighter card, 16px minimum on inputs so iOS doesn't zoom */
   .contact__title { margin-bottom: 16px; }
@@ -812,6 +815,14 @@ input, textarea, button, select { font-family: inherit; }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 18px 16px; }
   .footer__grid > div:first-child { grid-column: 1 / -1; }
   .footer__blurb { max-width: none; }
+
+  /* Follow runs full width as a single row instead of orphaning a half-column */
+  .footer__grid > div:last-child { grid-column: 1 / -1; }
+  .footer__grid > div:last-child .footer__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
   .footer__legal { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 
