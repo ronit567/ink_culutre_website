@@ -110,6 +110,8 @@ input, textarea, button, select { font-family: inherit; }
 }
 
 .brand {
+  position: relative;
+  z-index: 25;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -138,30 +140,39 @@ input, textarea, button, select { font-family: inherit; }
 
 .nav-toggle {
   display: none;
-  width: 42px;
-  height: 42px;
+  position: relative;
+  z-index: 25;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 1px solid rgba(242, 240, 237, 0.35);
+  border: 0;
   background: transparent;
   cursor: pointer;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
 }
 .nav-toggle__bar {
   display: block;
-  width: 18px;
   height: 1px;
   background: var(--fg);
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), width 0.3s ease;
 }
+.nav-toggle__bar:first-child { width: 26px; }
+.nav-toggle__bar:last-child  { width: 17px; }
+.nav-toggle:hover .nav-toggle__bar:last-child { width: 26px; }
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar { width: 24px; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bar:first-child {
-  transform: translateY(3.5px) rotate(45deg);
+  transform: translateY(4px) rotate(45deg);
 }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bar:last-child {
-  transform: translateY(-3.5px) rotate(-45deg);
+  transform: translateY(-4px) rotate(-45deg);
 }
+
+/* Sheet-only block — desktop keeps the plain inline nav. */
+.site-nav__foot { display: none; }
 
 /* ------------------------------------------------------------------ hero */
 
@@ -188,6 +199,16 @@ input, textarea, button, select { font-family: inherit; }
   object-fit: cover;
 }
 .hero__texture { background: var(--stripe); }
+
+/* If playback never starts — iOS Low Power Mode, or a per-site "Never Auto-Play"
+   setting in Safari — drop the video and hold the poster frame instead. Safari
+   paints a play control over a paused video, and this hero is decorative. */
+.hero--poster .hero__video { display: none; }
+.hero--poster .hero__texture {
+  background-image: url("assets/studio-poster.jpg");
+  background-size: cover;
+  background-position: center;
+}
 .hero__scrim {
   background: radial-gradient(120% 90% at 50% 45%,
     rgba(10, 10, 10, 0.35) 0%,
@@ -710,24 +731,90 @@ input, textarea, button, select { font-family: inherit; }
 
   .nav-toggle { display: flex; }
 
+  /* Full-screen sheet: the header stays above it, so the logo and the
+     close control remain in place while it is open. */
   .site-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0;
-    background: var(--ink);
-    border-top: 1px solid var(--rule-dark);
-    border-bottom: 1px solid var(--rule-dark);
-    display: none;
+    padding: 104px var(--gutter) 36px;
+    counter-reset: navitem;
+    background: rgba(10, 10, 10, 0.92);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    backdrop-filter: blur(18px) saturate(120%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.34s ease, visibility 0.34s;
   }
-  .site-nav[data-open="true"] { display: flex; }
-  .site-nav a {
-    padding: 18px var(--gutter);
-    border-bottom: 1px solid var(--rule-dark);
+  .site-nav[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
-  .site-nav a:last-child { border-bottom: 0; }
+
+  .site-nav > a {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 19px 0;
+    border-bottom: 1px solid rgba(242, 240, 237, 0.1);
+    font-family: var(--display);
+    font-size: 30px;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-transform: none;
+    color: var(--fg-hi);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s ease,
+                transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+                color 0.2s ease;
+  }
+  .site-nav > a::before {
+    counter-increment: navitem;
+    content: "0" counter(navitem);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--eyebrow-dark);
+  }
+  .site-nav > a:hover,
+  .site-nav > a:active { color: var(--fg-mute); }
+
+  .site-nav[data-open="true"] > a { opacity: 1; transform: none; }
+  .site-nav[data-open="true"] > a:nth-of-type(1) { transition-delay: 0.08s; }
+  .site-nav[data-open="true"] > a:nth-of-type(2) { transition-delay: 0.14s; }
+  .site-nav[data-open="true"] > a:nth-of-type(3) { transition-delay: 0.20s; }
+  .site-nav[data-open="true"] > a:nth-of-type(4) { transition-delay: 0.26s; }
+
+  .site-nav__foot {
+    display: block;
+    margin-top: auto;
+    padding-top: 30px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s ease 0.3s,
+                transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s;
+  }
+  .site-nav[data-open="true"] .site-nav__foot { opacity: 1; transform: none; }
+
+  .site-nav__cta { display: block; width: 100%; text-align: center; }
+  .site-nav__meta {
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--mono-faint);
+  }
+  .site-nav__meta a { color: var(--fg-quiet); }
 
   .hero { height: 92vh; min-height: 540px; }
   .hero__actions { margin-top: 34px; }

@@ -11,6 +11,9 @@
     if (!toggle || !nav) return;
     nav.setAttribute('data-open', open ? 'true' : 'false');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+    // Lock the page behind the sheet so it doesn't scroll under the overlay.
+    document.body.style.overflow = open ? 'hidden' : '';
   }
 
   if (toggle && nav) {
@@ -39,6 +42,44 @@
   if (hero && still && still.matches) {
     hero.removeAttribute('autoplay');
     hero.pause();
+  } else if (hero) {
+    // WebKit wants muted set as a property, not just an attribute, and won't
+    // start an inline video off the autoplay attribute alone.
+    hero.muted = true;
+    hero.setAttribute('muted', '');
+
+    var heroSection = hero.closest('.hero');
+    var confirmed = false;
+
+    var showPoster = function () { if (heroSection) heroSection.classList.add('hero--poster'); };
+    var hidePoster = function () { if (heroSection) heroSection.classList.remove('hero--poster'); };
+
+    var startHero = function () {
+      var playing = hero.play();
+      if (playing && playing.catch) playing.catch(function () { /* blocked; poster stands in */ });
+    };
+
+    hero.addEventListener('playing', function () { confirmed = true; hidePoster(); });
+    hero.addEventListener('error', showPoster);
+
+    startHero();
+    hero.addEventListener('loadeddata', startHero);
+    hero.addEventListener('canplay', startHero);
+
+    // Nothing playing shortly after load means autoplay was refused. Swap in the
+    // poster so no browser draws a play control over a dead video.
+    setTimeout(function () { if (!confirmed || hero.paused) showPoster(); }, 2500);
+
+    // iOS Low Power Mode refuses autoplay outright — pick it up on first contact.
+    ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+      document.addEventListener(evt, function resume() {
+        document.removeEventListener(evt, resume);
+        if (!hero.paused) return;
+        hidePoster();
+        startHero();
+        setTimeout(function () { if (hero.paused) showPoster(); }, 1200);
+      }, { passive: true });
+    });
   }
 
   /* -------------------------------------------------------- portfolio tiles */
