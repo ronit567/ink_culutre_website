@@ -41,6 +41,27 @@
     hero.pause();
   }
 
+  /* -------------------------------------------------------- portfolio tiles */
+
+  var shots = document.querySelector('.shots');
+
+  if (shots && 'IntersectionObserver' in window) {
+    // Arm the CSS only now, so the tiles are never hidden without JS to reveal them.
+    shots.setAttribute('data-reveal', 'on');
+
+    var tiles = Array.prototype.slice.call(shots.children);
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.style.transitionDelay = (tiles.indexOf(entry.target) * 90) + 'ms';
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+    tiles.forEach(function (tile) { io.observe(tile); });
+  }
+
   /* --------------------------------------------------------- booking form */
 
   var form = document.querySelector('.booking');

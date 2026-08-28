@@ -440,9 +440,30 @@ input, textarea, button, select { font-family: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  filter: grayscale(1) brightness(0.82) contrast(1.06);
+  transform: scale(1.005);
+  transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.5s ease;
 }
-.shot:hover .shot__img { transform: scale(1.03); }
+.shot:hover .shot__img,
+.shot:focus-within .shot__img {
+  transform: scale(1.06);
+  filter: grayscale(0) brightness(1) contrast(1);
+}
+
+/* Touch devices never hover — show the work in colour, lightly held back. */
+@media (hover: none) {
+  .shot__img { filter: grayscale(0.2) brightness(0.94); }
+}
+
+/* Tiles rise into view; only armed once script.js sets data-reveal, so the
+   grid is never blank when JavaScript is unavailable. */
+.shots[data-reveal] .shot {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 0.2s ease;
+}
+.shots[data-reveal] .shot.is-visible { opacity: 1; transform: none; }
 
 .shot__caption {
   position: relative;
@@ -708,26 +729,59 @@ input, textarea, button, select { font-family: inherit; }
   }
   .site-nav a:last-child { border-bottom: 0; }
 
-  .hero { height: 92vh; min-height: 540px; }
-  .hero__actions { margin-top: 34px; }
+  /* The loop is 1.9:1 — cover on a tall phone screen crops it to a sliver, so
+     fit the full width and let the texture behind fill the rest. */
+  .hero { height: 76vh; min-height: 500px; }
+  .hero__video { object-fit: contain; }
+  .hero__actions { margin-top: 30px; }
 
-  .studio, .contact { padding: 72px var(--gutter); }
-  .services { padding: 68px var(--gutter); }
-  .work { padding: 48px var(--gutter) 60px; }
+  .studio, .contact { padding: 60px var(--gutter); }
+  .services { padding: 56px var(--gutter); }
+  .work { padding: 44px var(--gutter) 56px; }
 
   .shots { grid-template-columns: repeat(2, 1fr); }
 
+  /* studio — lighter text block */
+  .studio__grid { gap: 32px; }
+  .studio__body { gap: 18px; }
+  .lede { font-size: 16.5px; line-height: 1.62; }
+  .stats { gap: 18px; margin-top: 6px; padding-top: 26px; }
+  .stat__num { font-size: 30px; }
+  .stat__label { margin-top: 4px; font-size: 10.5px; letter-spacing: 0.14em; }
+
+  /* services — number hugs the name instead of holding a fixed column */
   .service {
-    grid-template-columns: 44px 1fr;
-    gap: 10px 20px;
-    padding: 30px 0;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
+    padding: 26px 0;
   }
-  .service__copy { grid-column: 2; }
+  .service__num { font-size: 11px; }
+  .service__name { font-size: 21px; }
+  .service__copy { grid-column: 2; font-size: 15.5px; line-height: 1.55; }
 
   .section-head { gap: 20px; }
   .section-head__link { white-space: normal; }
 
-  .booking__card { padding: 32px 26px; }
+  /* contact — tighter card, 16px minimum on inputs so iOS doesn't zoom */
+  .contact__title { margin-bottom: 16px; }
+  .contact__intro { margin-bottom: 30px; font-size: 16.5px; }
+  .details { gap: 18px; padding-top: 24px; }
+  .detail__label { margin-bottom: 6px; font-size: 12px; }
+  .detail__value { font-size: 15.5px; }
+  .booking__card { padding: 26px 20px; gap: 18px; }
+  .field { gap: 7px; }
+  .field__label { font-size: 12px; letter-spacing: 0.18em; }
+  .field__input { font-size: 16px; padding: 8px 0; }
+
+  /* footer — much tighter */
+  .site-footer { padding: 32px var(--gutter) 18px; }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 22px; padding-bottom: 22px; }
+  .footer__logo { height: 46px; margin-bottom: 10px; }
+  .footer__blurb { font-size: 13px; line-height: 1.5; }
+  .footer__heading { margin-bottom: 8px; font-size: 11px; letter-spacing: 0.18em; }
+  .footer__text { font-size: 13px; line-height: 1.5; }
+  .footer__links { gap: 5px; font-size: 13px; }
+  .footer__legal { padding-top: 14px; font-size: 9.5px; letter-spacing: 0.08em; }
 }
 
 @media (max-width: 560px) {
@@ -737,15 +791,28 @@ input, textarea, button, select { font-family: inherit; }
   .btn { text-align: center; }
 
   .shots { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: 1fr 1fr; gap: 22px; }
 
-  .booking__card { grid-template-columns: 1fr; }
+  /* keep all three stats on one line rather than orphaning the third */
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat__num { font-size: 26px; }
+  .stat__label { font-size: 10px; letter-spacing: 0.12em; }
+
+  .booking__card { grid-template-columns: 1fr; gap: 16px; }
   .field--full, .booking__foot { grid-column: span 1; }
-  .booking__foot { align-items: flex-start; flex-direction: column-reverse; }
+  .booking__foot {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .booking__note { font-size: 10.5px; text-align: center; }
   .btn--dark { width: 100%; }
 
-  .footer__grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer__legal { flex-direction: column; align-items: flex-start; gap: 10px; }
+  /* footer stays two-up; the brand block takes the full first row */
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+  .footer__grid > div:first-child { grid-column: 1 / -1; }
+  .footer__blurb { max-width: none; }
+  .footer__legal { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
